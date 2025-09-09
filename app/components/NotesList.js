@@ -11,7 +11,7 @@ export default function NotesList({ notes, onRemove, onDetails }) {
       ) : (
         notes.map((note) => (
           <NoteItem
-            id={note.id}
+            key={note.id}
             title={note.title}
             content={note.content}
             createdAt={note.createdAt}
