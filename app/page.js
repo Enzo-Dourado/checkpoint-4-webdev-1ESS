@@ -1,18 +1,36 @@
-"use client"
+// app/page.jsx (Home)
+"use client";
 
 import { useState } from "react";
 import NotesForm from "./components/NotesForm";
 import Header from "./components/Header";
-import NoteItem from "./components/NoteItem";
+import NotesList from "./components/NotesList";
+import SearchBar from "./components/SearchBar";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
   const [query, setQuery] = useState("");
 
-  // Função que sera passada para o NotesForm para adicionar uma nova nota
   const handleAddNote = (note) => {
-    setNotes([note, ...notes]); // Adiciona a nova nota a lista de notas
+    setNotes([note, ...notes]);
   };
+
+  const handleRemoveNote = (id) => {
+    setNotes(notes.filter((note) => note.id !== id));
+  };
+
+  const handleDetails = (note) => {
+    console.log("Detalhes:", note);
+  };
+
+  // Filtragem centralizada no Home
+  const filteredNotes = notes.filter(
+    (note) =>
+      note.title.toLowerCase().includes(query.toLowerCase()) ||
+      note.content.toLowerCase().includes(query.toLowerCase()) ||
+      note.id.toString().includes(query) ||
+      note.createdAt.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <>
@@ -20,17 +38,11 @@ export default function Home() {
       <div className="p-6 space-y-6">
         <NotesForm onAddNote={handleAddNote} nextId={notes.length + 1} />
         <SearchBar onSearch={setQuery} />
-        
-        {notes.map((note) => (
-          <NoteItem
-            key={note.id}
-            title={note.title}
-            content={note.content}
-            createdAt={note.createdAt}
-            onDetails={() => console.log("Detalhes da nota")}
-            onRemove={() => console.log("Excluir a nota")}
-          />
-        ))}
+        <NotesList
+          notes={filteredNotes}
+          onRemove={handleRemoveNote}
+          onDetails={handleDetails}
+        />
       </div>
     </>
   );
