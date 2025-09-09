@@ -7,6 +7,7 @@ import NoteItem from "./components/NoteItem";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
+  const [query, setQuery] = useState("");
 
   // Função que sera passada para o NotesForm para adicionar uma nova nota
   const handleAddNote = (note) => {
@@ -18,6 +19,7 @@ export default function Home() {
       <Header />
       <div className="p-6 space-y-6">
         <NotesForm onAddNote={handleAddNote} nextId={notes.length + 1} />
+        <SearchBar onSearch={setQuery} />
         
         {notes.map((note) => (
           <NoteItem
