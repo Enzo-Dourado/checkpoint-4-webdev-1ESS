@@ -8,13 +8,7 @@ Este é um aplicativo de anotações simples desenvolvido com [Next.js](https://
 - Listar todas as anotações
 - Buscar anotações por título, conteúdo, ID ou data de criação
 - Excluir anotações
-- Visualizar detalhes de uma anotação (exibido no console)
-
-## Tecnologias Utilizadas
-
-- [Next.js 15](https://nextjs.org/)
-- [React 19](https://react.dev/)
-- [Tailwind CSS 4](https://tailwindcss.com/) para estilização
+- Visualizar anotação separada
 
 ## Como rodar o projeto
 
